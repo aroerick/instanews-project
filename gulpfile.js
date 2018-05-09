@@ -6,7 +6,8 @@ var gulp = require("gulp"),
     sass = require("gulp-sass"),
     autoprefixer = require("gulp-autoprefixer"),
     cssnano = require("gulp-cssnano"),
-    prettyError = require("gulp-prettyerror");
+    prettyError = require("gulp-prettyerror"),
+    babel = require("gulp-babel");
 
 gulp.task("sass", function() {
     return gulp
@@ -35,6 +36,9 @@ gulp.task("lint", function(){
 gulp.task("js", gulp.series("lint", function() {
     return gulp
         .src("./js/*.js")
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(rename({ extname: ".min.js" }))
         .pipe(gulp.dest("./build/js"));

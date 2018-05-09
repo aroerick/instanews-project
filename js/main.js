@@ -22,9 +22,9 @@
         $(".stories-grid").append("<img class='loader' src='assets/images/ajax-loader.gif'>");
 
 //Getting dat API right
-        var genreSelect = $(this).val();
+        let genreSelect = $(this).val();
         // console.log(genreSelect);
-        var url = "https://api.nytimes.com/svc/topstories/v2/" + genreSelect + ".json"; 
+        let url = "https://api.nytimes.com/svc/topstories/v2/" + genreSelect + ".json"; 
         url+= "?" + $.param({
                 "api-key": "63ff38af2226431eba347fc1bd5073e1"
         });
@@ -37,18 +37,18 @@
                 url: url,
                 method: "GET",
         }).done(function(data) {
-                var baseData = data.results.filter(function(value){
+                let baseData = data.results.filter(function(value){
                         return value.multimedia.length > 0;
                 }).slice(0, 12);
                 // console.log(baseData);
                 
                 $.each(baseData, function(key, value) {
                         // console.log(value);
-                        var storyUrl = value.url;
-                        var storyDesc = value.abstract;
-                        var storyImag = value.multimedia[4].url;
+                        const storyUrl = value.url;
+                        const storyDesc = value.abstract;
+                        const storyImag = value.multimedia[4].url;
 
-                        var html = "";
+                        let html = "";
                         html += "<li class='list-item' style='background-image: url(";
                         html += storyImag + ")'>"
                         html += "<a href='" + storyUrl;
